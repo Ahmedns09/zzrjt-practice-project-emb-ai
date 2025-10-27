@@ -29,6 +29,9 @@ def sent_analyzer():
     if label is None:
         return "Invalid input! Try again."
 
+    elif label == "empty":
+        return "Invalid input! You need to enter the text!"
+
     return (
         f"the given text has been identified as {label.split('_')[1]} "
         f"with a score of {score}."

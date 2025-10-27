@@ -12,6 +12,9 @@ def sentiment_analyzer(text_to_analyse):
     analysis score and label of the respective input, from the 
     Watson AI NLP Library.
     '''
+    if (text_to_analyse == ''):
+        return {'label':"empty", 'score':"empty"}
+
     # URL of the sentiment analysis service
     url = (
         "https://sn-watson-sentiment-bert.labs.skills.network/"
@@ -25,6 +28,10 @@ def sentiment_analyzer(text_to_analyse):
     response = requests.post(url, json = myobj, headers=header, timeout=10)
     # Parsing the JSON response from the API
     formatted_response = json.loads(response.text)
+    print("")
+    print(response.status_code)
+    print(formatted_response)
+    print("")
 
     if response.status_code == 200:
         # Extracting sentiment label and score from the response
@@ -32,8 +39,8 @@ def sentiment_analyzer(text_to_analyse):
         score = formatted_response['documentSentiment']['score']
 
     elif response.status_code == 500:
-        label = None
-        score = None
+            label = None
+            score = None
 
     else:
         label = None
