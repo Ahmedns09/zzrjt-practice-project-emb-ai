@@ -19,6 +19,15 @@ def sent_analyzer():
         score for the provided text.
     '''
     # TODO
+    text_to_analyze = request.args.get("textToAnalyze")
+
+    response = sentiment_analyzer(text_to_analyze)
+
+    # Extract the label and score
+    label = response['label']
+    score = response['score']
+
+    return "the given text hsa been identified as {} with a score of {}.".format(label.split('_')[1], score)
 
 @app.route("/")
 def render_index_page():
